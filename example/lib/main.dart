@@ -5,22 +5,24 @@ import 'slides.dart';
 import 'theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme,
-      home: MyPresentation(),
+      home: const MyPresentation(),
     );
   }
 }
 
 class MyPresentation extends StatefulWidget {
-  MyPresentation({Key? key}) : super(key: key);
+  const MyPresentation({Key? key}) : super(key: key);
 
   @override
   _MyPresentationState createState() => _MyPresentationState();
@@ -41,7 +43,7 @@ class _MyPresentationState extends State<MyPresentation> {
       viewPortFraction: _viewPortFraction,
       showHeader: _showHeader,
       showFooter: _showFooter,
-      slides: [
+      slides: const [
         TitleSlide(),
         AgendaSlide(),
       ],
