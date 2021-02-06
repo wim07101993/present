@@ -31,7 +31,7 @@ class MyPresentation extends StatefulWidget {
 
 class _MyPresentationState extends State<MyPresentation> {
   final controller = PresentationController();
-  double _viewPortFraction = 0.9;
+  double _viewPortFraction = 1;
   bool _showHeader = false;
   bool _showFooter = false;
 
@@ -42,13 +42,14 @@ class _MyPresentationState extends State<MyPresentation> {
       controller: controller,
       onSlideChanged: onSlideChanged,
       viewPortFraction: _viewPortFraction,
-      // showHeader: _showHeader,
-      // showFooter: _showFooter,
+      showHeader: _showHeader,
+      showFooter: _showFooter,
       slides: const [
-        // TitleSlide(),
-        // AgendaSlide(),
-        // WhatIsFlutterSlide(),
+        TitleSlide(),
+        AgendaSlide(),
+        WhatIsFlutterSlide(),
         FlutterArchitecture(),
+        SetUpSlide(),
       ],
     );
   }

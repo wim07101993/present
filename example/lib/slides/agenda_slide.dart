@@ -1,18 +1,14 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:present/present.dart';
 
-class AgendaSlide extends StatelessWidget {
-  const AgendaSlide({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text('- What is Flutter'),
-        SizedBox(height: 12),
-        Text('- Flutter architecture'),
-      ],
-    );
-  }
+class AgendaSlide extends TitleWithBulletsSlide {
+  const AgendaSlide({Key? key})
+      : super(
+          key: key,
+          title: 'Agenda',
+          bullets: const [
+            Text('- What is Flutter'),
+            Text('- Set-up and first steps'),
+          ],
+        );
 }
