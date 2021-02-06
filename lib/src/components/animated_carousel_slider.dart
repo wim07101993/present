@@ -1,13 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 class AnimatedCarouselSlider extends ImplicitlyAnimatedWidget {
-  AnimatedCarouselSlider({
+  const AnimatedCarouselSlider({
     Key? key,
     required this.items,
     required this.options,
     this.controller,
-    BoxConstraints? constraints,
     Curve curve = Curves.linear,
     required Duration duration,
     VoidCallback? onEnd,
@@ -20,13 +19,12 @@ class AnimatedCarouselSlider extends ImplicitlyAnimatedWidget {
           onEnd: onEnd,
         );
 
-  AnimatedCarouselSlider.builder({
+  const AnimatedCarouselSlider.builder({
     Key? key,
     required this.itemCount,
     required this.itemBuilder,
     required this.options,
     this.controller,
-    BoxConstraints? constraints,
     Curve curve = Curves.linear,
     required Duration duration,
     VoidCallback? onEnd,
@@ -74,18 +72,18 @@ class _AnimatedCarouselSliderState
       _height = visitor(
         _height,
         widget.options.height,
-        (dynamic value) => Tween<double>(begin: value),
+        (dynamic value) => Tween<double>(begin: value as double),
       ) as Tween<double>;
     }
     _aspectRatio = visitor(
       _aspectRatio,
       widget.options.aspectRatio,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => Tween<double>(begin: value as double),
     ) as Tween<double>;
     _viewportFraction = visitor(
       _viewportFraction,
       widget.options.viewportFraction,
-      (dynamic value) => Tween<double>(begin: value),
+      (dynamic value) => Tween<double>(begin: value as double),
     ) as Tween<double>;
   }
 
