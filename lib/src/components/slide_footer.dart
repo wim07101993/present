@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SlideFooter extends StatelessWidget {
-  const SlideFooter(
-      {Key? key,
-      required this.onNext,
-      required this.onPrevious,
-      required this.currentSlideIndex,
-      required this.slideCount})
-      : super(key: key);
+  const SlideFooter({
+    Key? key,
+    required this.onNext,
+    required this.onPrevious,
+    required this.currentSlideIndex,
+    required this.slideCount,
+  }) : super(key: key);
 
   static const _buttonTextStyle = TextStyle(
     fontSize: 16,
@@ -56,7 +56,7 @@ class SlideFooter extends StatelessWidget {
           Icon(Icons.arrow_forward),
         ],
       ),
-      onPressed: onPrevious,
+      onPressed: onNext,
     );
   }
 

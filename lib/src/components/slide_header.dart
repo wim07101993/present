@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:present/src/components/presentation_progress_indicator.dart';
 
+import 'presentation_progress_indicator.dart';
 import 'time.dart';
 
 class SlideHeader extends StatelessWidget {
