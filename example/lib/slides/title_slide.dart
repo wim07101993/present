@@ -7,7 +7,7 @@ class TitleSlide extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Image.asset('assets/images/flutter_logo.png')],
+      children: [Image.asset('assets/images/flutter_logo_with_name.png')],
     );
   }
 }

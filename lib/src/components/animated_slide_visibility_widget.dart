@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class SlideVisibilityAnimatedWidget extends StatefulWidget {
-  const SlideVisibilityAnimatedWidget({
+class AnimatedSlideVisibilityWidget extends StatefulWidget {
+  const AnimatedSlideVisibilityWidget({
     Key? key,
     required this.child,
     this.shouldBeVisible = true,
@@ -43,13 +43,13 @@ class SlideVisibilityAnimatedWidget extends StatefulWidget {
   final double axisAlignment;
 
   @override
-  _SlideVisibilityAnimatedWidgetState createState() {
-    return _SlideVisibilityAnimatedWidgetState();
+  _AnimatedSlideVisibilityWidgetState createState() {
+    return _AnimatedSlideVisibilityWidgetState();
   }
 }
 
-class _SlideVisibilityAnimatedWidgetState
-    extends State<SlideVisibilityAnimatedWidget> with TickerProviderStateMixin {
+class _AnimatedSlideVisibilityWidgetState
+    extends State<AnimatedSlideVisibilityWidget> with TickerProviderStateMixin {
   late AnimationController _animationCtrl;
   late CurvedAnimation _slideAnimation;
 

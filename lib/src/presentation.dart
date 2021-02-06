@@ -107,7 +107,7 @@ class _PresentationState extends State<Presentation>
   }
 
   Widget _header() {
-    return SlideVisibilityAnimatedWidget(
+    return AnimatedSlideVisibilityWidget(
       shouldBeVisible: widget.showHeader,
       child: widget.headerBuilder == null
           ? SlideHeader(
@@ -143,7 +143,7 @@ class _PresentationState extends State<Presentation>
   }
 
   Widget _footer() {
-    return SlideVisibilityAnimatedWidget(
+    return AnimatedSlideVisibilityWidget(
       shouldBeVisible: widget.showFooter,
       child: widget.footerBuilder == null
           ? SlideFooter(

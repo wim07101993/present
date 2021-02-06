@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'flutter_architecture/nest_hub.dart';
 import 'flutter_architecture/nest_hub_screen_code.dart';
 
-class FlutterArchitecture extends StatefulWidget {
-  const FlutterArchitecture({Key? key}) : super(key: key);
+class EverythingIsAWidgetSlide extends StatefulWidget {
+  const EverythingIsAWidgetSlide({Key? key}) : super(key: key);
 
   @override
-  _FlutterArchitectureState createState() => _FlutterArchitectureState();
+  _EverythingIsAWidgetSlideState createState() {
+    return _EverythingIsAWidgetSlideState();
+  }
 }
 
-class _FlutterArchitectureState extends State<FlutterArchitecture> {
+class _EverythingIsAWidgetSlideState extends State<EverythingIsAWidgetSlide> {
   bool _isEmbedded = true;
 
   @override
@@ -25,8 +27,9 @@ class _FlutterArchitectureState extends State<FlutterArchitecture> {
         ),
         Expanded(
           child: GestureDetector(
-            onTap: () =>
-                _isEmbedded ? setState(() => _isEmbedded = !_isEmbedded) : null,
+            onTap: _isEmbedded
+                ? () => setState(() => _isEmbedded = !_isEmbedded)
+                : null,
             child: Expanded(
               child: Row(
                 children: [
