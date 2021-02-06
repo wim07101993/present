@@ -10,15 +10,19 @@ class Presentation extends StatefulWidget {
     Key? key,
     required this.slides,
     this.viewPortFraction = 0.8,
+    this.onSlideChanged,
   }) : super(key: key);
 
   /// The slides to show in the presentation.
   final List<Widget> slides;
 
-  ///  The fraction of the viewport that each slide should occupy.
+  /// The fraction of the viewport that each slide should occupy.
   ///
   /// Defaults to 0.8, which means each page fills 80% of the presentation view.
   final double viewPortFraction;
+
+  /// Gets invoked when the current slide changed.
+  final void Function(int index)? onSlideChanged;
 
   @override
   _PresentationState createState() => _PresentationState();
@@ -56,6 +60,7 @@ class _PresentationState extends State<Presentation>
         height: double.infinity,
         enableInfiniteScroll: false,
         viewportFraction: widget.viewPortFraction,
+        onPageChanged: onSlideChanged,
       ),
       itemCount: widget.slides.length,
       itemBuilder: (context, i, _) {
@@ -69,5 +74,11 @@ class _PresentationState extends State<Presentation>
 
   Widget _footer() {
     return Container();
+  }
+
+  void onSlideChanged(int index, CarouselPageChangedReason reason) {
+    if (widget.onSlideChanged != null) {
+      widget.onSlideChanged!(index);
+    }
   }
 }
