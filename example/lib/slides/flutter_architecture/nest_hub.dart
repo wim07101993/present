@@ -7,8 +7,10 @@ class NestHub extends StatefulWidget {
   const NestHub({
     Key? key,
     this.enableAnimations = true,
+    required this.isEmbedded,
   }) : super(key: key);
 
+  final bool isEmbedded;
   final bool enableAnimations;
 
   @override
@@ -26,6 +28,8 @@ class _NestHubState extends State<NestHub> with SingleTickerProviderStateMixin {
   late Animation<double> widgetWidthAnimation;
   late Animation<EdgeInsets> screenPaddingAnimation;
   late AnimationController animationCtrl;
+
+  bool isEmbedded = true;
 
   @override
   void initState() {
@@ -59,39 +63,42 @@ class _NestHubState extends State<NestHub> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (isEmbedded != widget.isEmbedded) {
+      if (isEmbedded) {
+        animationCtrl.forward();
+        isEmbedded = false;
+      } else {
+        animationCtrl.reverse();
+        isEmbedded = true;
+      }
+    }
     return FittedBox(
-      child: GestureDetector(
-        onTap: animationCtrl.status == AnimationStatus.completed ||
-                !widget.enableAnimations
-            ? null
-            : () => animationCtrl.forward(),
-        child: SizedBox(
-          height: widgetHeight,
-          width: widgetWidthAnimation.value,
-          child: Stack(
-            children: [
-              Opacity(
-                opacity: imageVisibilityAnimation.value,
-                child: Image.asset('assets/images/google_nest_hub.png'),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                padding: screenPaddingAnimation.value,
-                child: Transform(
-                  transform: Matrix4.identity()
-                    ..scale(screenScaleAnimation.value)
-                    ..setEntry(3, 2, 0.0007)
-                    ..rotateX(screenXRotationAnimation.value),
-                  alignment: FractionalOffset.bottomCenter,
-                  child: const SizedBox(
-                    height: screenHeight,
-                    width: screenRatio * screenHeight,
-                    child: NestHubScreen(),
-                  ),
+      child: SizedBox(
+        height: widgetHeight,
+        width: widgetWidthAnimation.value,
+        child: Stack(
+          children: [
+            Opacity(
+              opacity: imageVisibilityAnimation.value,
+              child: Image.asset('assets/images/google_nest_hub.png'),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              padding: screenPaddingAnimation.value,
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..scale(screenScaleAnimation.value)
+                  ..setEntry(3, 2, 0.0007)
+                  ..rotateX(screenXRotationAnimation.value),
+                alignment: FractionalOffset.bottomCenter,
+                child: const SizedBox(
+                  height: screenHeight,
+                  width: screenRatio * screenHeight,
+                  child: NestHubScreen(),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

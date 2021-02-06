@@ -28,6 +28,7 @@ class SlideFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (currentSlideIndex > 0) _previousButton() else Container(),
+          const SizedBox(height: 40),
           if (currentSlideIndex < slideCount - 1) _nextButton(),
         ],
       ),
