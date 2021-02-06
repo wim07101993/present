@@ -115,8 +115,13 @@ class _AnimatedCarouselSliderState
       disableCenter: widget.options.disableCenter,
     );
     return widget.itemBuilder == null
-        ? CarouselSlider(items: widget.items, options: options)
+        ? CarouselSlider(
+            carouselController: widget.controller,
+            items: widget.items,
+            options: options,
+          )
         : CarouselSlider.builder(
+            carouselController: widget.controller,
             itemCount: widget.itemCount,
             itemBuilder: widget.itemBuilder,
             options: options,

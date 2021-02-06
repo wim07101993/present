@@ -21,6 +21,7 @@ class Presentation extends StatefulWidget {
   const Presentation({
     Key? key,
     required this.slides,
+    this.controller,
     this.viewPortFraction = 0.8,
     this.onSlideChanged,
     this.footerBuilder,
@@ -29,6 +30,9 @@ class Presentation extends StatefulWidget {
     this.showHeader = true,
     this.title,
   }) : super(key: key);
+
+  /// The controller which controls the presentation.
+  final PresentationController? controller;
 
   /// The slides to show in the presentation.
   final List<Widget> slides;
@@ -70,14 +74,27 @@ class Presentation extends StatefulWidget {
 
 class _PresentationState extends State<Presentation>
     with SingleTickerProviderStateMixin {
-  final _carouselCtrl = CarouselController();
-
+  late PresentationController controller;
   int _slideIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.controller ?? PresentationController();
+  }
+
+  @override
+  void didUpdateWidget(covariant Presentation oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != null && widget.controller != controller) {
+      setState(() => controller = widget.controller!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _carouselCtrl.nextPage,
+      onTap: controller.nextPage,
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -108,8 +125,9 @@ class _PresentationState extends State<Presentation>
   }
 
   Widget _body() {
-    return AnimatedCarouselSlider.builder(
-      duration: const Duration(milliseconds: 800),
+    return CarouselSlider.builder(
+      // duration: const Duration(milliseconds: 800),
+      carouselController: controller,
       options: CarouselOptions(
         height: double.infinity,
         enableInfiniteScroll: false,
@@ -131,8 +149,8 @@ class _PresentationState extends State<Presentation>
       shouldBeVisible: widget.showFooter,
       child: widget.footerBuilder == null
           ? SlideFooter(
-              onNext: _carouselCtrl.nextPage,
-              onPrevious: _carouselCtrl.previousPage,
+              onNext: controller.nextPage,
+              onPrevious: controller.previousPage,
               currentSlideIndex: _slideIndex,
               slideCount: widget.slides.length,
             )
@@ -150,3 +168,10 @@ class _PresentationState extends State<Presentation>
     }
   }
 }
+
+abstract class PresentationController implements CarouselController {
+  factory PresentationController() => PresentationControllerImpl();
+}
+
+class PresentationControllerImpl extends CarouselControllerImpl
+    implements PresentationController {}

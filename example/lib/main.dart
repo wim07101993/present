@@ -27,6 +27,7 @@ class MyPresentation extends StatefulWidget {
 }
 
 class _MyPresentationState extends State<MyPresentation> {
+  final controller = PresentationController();
   double _viewPortFraction = 1;
   bool _showHeader = false;
   bool _showFooter = false;
@@ -35,6 +36,7 @@ class _MyPresentationState extends State<MyPresentation> {
   Widget build(BuildContext context) {
     return Presentation(
       title: 'Flutter workshop',
+      controller: controller,
       onSlideChanged: onSlideChanged,
       viewPortFraction: _viewPortFraction,
       showHeader: _showHeader,
