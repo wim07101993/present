@@ -10,6 +10,7 @@ class AgendaSlide extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
         Text('- What is Flutter'),
+        SizedBox(height: 12),
         Text('- Flutter architecture'),
       ],
     );

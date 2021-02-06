@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:present/present.dart';
 
+import 'slides/flutter_architecture_slide.dart';
 import 'slides.dart';
 import 'theme.dart';
 
@@ -46,6 +47,8 @@ class _MyPresentationState extends State<MyPresentation> {
       slides: const [
         TitleSlide(),
         AgendaSlide(),
+        WhatIsFlutterSlide(),
+        FlutterArchitecture(),
       ],
     );
   }
