@@ -44,11 +44,11 @@ class _MyPresentationState extends State<MyPresentation> {
       showHeader: _showHeader,
       showFooter: _showFooter,
       slides: const [
-        // TitleSlide(),
-        // AgendaSlide(),
-        // WhatIsFlutterSlide(),
-        // EverythingIsAWidgetSlide(),
-        // SetUpSlide(),
+        TitleSlide(),
+        AgendaSlide(),
+        WhatIsFlutterSlide(),
+        EverythingIsAWidgetSlide(),
+        SetUpSlide(),
         FirstSteps(),
       ],
     );

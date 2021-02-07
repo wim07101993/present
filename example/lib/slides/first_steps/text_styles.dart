@@ -9,11 +9,16 @@ const code = TextStyle(
 final orange = code.copyWith(color: const Color(0xFFF78C6C));
 final yellow = code.copyWith(color: const Color(0xFFFFCB6B));
 final green = code.copyWith(color: const Color(0xFFC3E88D));
+final paleBlue = code.copyWith(
+  color: const Color(0xFF3C4F58),
+  fontStyle: FontStyle.italic,
+  fontWeight: FontWeight.w300,
+);
 final cyan = code.copyWith(color: const Color(0xFF89DDFF));
 final turquoise = code.copyWith(color: const Color(0xFF80CBC4));
-final blue = code.copyWith(
-  color: const Color(0xFF82AAFF),
+final blue = code.copyWith(color: const Color(0xFF82AAFF));
+final purple = code.copyWith(
+  color: const Color(0xFFC792EA),
   fontStyle: FontStyle.italic,
 );
-final purple = code.copyWith(color: const Color(0xFFC792EA));
 final white = code.copyWith(color: const Color(0xFFEEFFE3));

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:present/present.dart';
 
-import 'first_steps/hello_world.dart';
-import 'first_steps/hello_world_app.dart';
-import 'first_steps/hello_world_with_centered_scaffold.dart';
-import 'first_steps/lines.dart' as lines;
-import 'first_steps/text_styles.dart';
+import 'first_steps/code.dart';
+import 'first_steps/output.dart';
 
 class Step {
   static const int helloWorld = 0;
   static const int helloWorldApp = 1;
   static const int helloWorldWithCenteredScaffold = 2;
+  static const int withAppBar = 3;
+  static const int demoApp = 4;
+
+  static const int maxStep = 4;
 }
 
 class FirstSteps extends StatefulWidget {
@@ -22,122 +22,71 @@ class FirstSteps extends StatefulWidget {
 
 class _FirstStepsState extends State<FirstSteps> {
   int _step = Step.helloWorld;
+  int? _outputStep;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => _step++),
-      child: Container(
-        padding: const EdgeInsets.all(32),
-        color: const Color(0xFF263238),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IntrinsicWidth(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _main(),
-                  _my_app(),
-                ],
-              ),
-            ),
-            const SizedBox(width: 64),
-            _output(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // ignore: non_constant_identifier_names
-  Widget _main() {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        lines.void_main,
-        AnimatedSlideVisibilityWidget(
-          shouldBeVisible: _step == Step.helloWorld,
-          child: lines.print_hello_world,
-        ),
-        AnimatedSlideVisibilityWidget(
-          shouldBeVisible: _step != Step.helloWorld,
-          child: lines.run_app_const_my_app,
-        ),
-        Text.rich(TextSpan(text: '}', style: cyan)),
+        Expanded(child: _code()),
+        const SizedBox(width: 32),
+        Output(step: _outputStep),
       ],
     );
   }
 
-  // ignore: non_constant_identifier_names
-  Widget _my_app() {
-    return AnimatedSlideVisibilityWidget(
-      shouldBeVisible: _step != Step.helloWorld,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget _code() {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      color: const Color(0xFF263238),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('', style: code),
-          lines.class_my_app_extends_stateless_widget,
-          lines.const_my_app_key_key_super_key_key,
-          const Text(''),
-          lines.override,
-          lines.widget_build_build_context_context,
-          lines.return_material_app,
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldApp,
-            child: lines.home_text_hello_world,
+          Expanded(
+            child: Container(
+              alignment: Alignment.topLeft,
+              child: FittedBox(fit: BoxFit.scaleDown, child: Code(step: _step)),
+            ),
           ),
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldWithCenteredScaffold,
-            child: lines.home_scaffold,
-          ),
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldWithCenteredScaffold,
-            child: lines.body_center,
-          ),
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldWithCenteredScaffold,
-            child: lines.child_text_hello_world,
-          ),
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldWithCenteredScaffold,
-            child: Text.rich(TextSpan(text: '        ),', style: cyan)),
-          ),
-          AnimatedSlideVisibilityWidget(
-            shouldBeVisible: _step == Step.helloWorldWithCenteredScaffold,
-            child: Text.rich(TextSpan(text: '      ),', style: cyan)),
-          ),
-          Text.rich(TextSpan(text: '    );', style: cyan)),
-          Text.rich(TextSpan(text: '  }', style: cyan)),
-          Text.rich(TextSpan(text: '}', style: cyan)),
+          _buttons(),
         ],
       ),
     );
   }
 
-  Widget _output() {
-    Widget widget;
-    switch (_step) {
-      case Step.helloWorld:
-        widget = const HelloWorld();
-        break;
-      case Step.helloWorldApp:
-        widget = const HelloWorldApp();
-        break;
-      case Step.helloWorldWithCenteredScaffold:
-        widget = const HelloWorldWithCenteredScaffold();
-        break;
-      default:
-        widget = Container();
-        break;
-    }
-    return FittedBox(
-      child: Container(
-        height: 1170,
-        width: 540,
-        color: Colors.white,
-        child: widget,
+  Widget _buttons() {
+    return Column(children: [
+      SizedBox(
+        height: 32,
+        width: 110,
+        child: ElevatedButton(
+          onPressed: onNextPressed,
+          child: const Text('Next'),
+        ),
       ),
-    );
+      const SizedBox(height: 16),
+      SizedBox(
+        height: 32,
+        width: 110,
+        child: ElevatedButton(
+          onPressed: onRunPressed,
+          child: const Text('Run'),
+        ),
+      ),
+    ]);
+  }
+
+  void onNextPressed() {
+    if (_step < Step.maxStep) {
+      setState(() => _step++);
+    }
+  }
+
+  void onRunPressed() {
+    if (_outputStep != _step) {
+      setState(() => _outputStep = _step);
+    }
   }
 }
